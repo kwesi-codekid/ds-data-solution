@@ -11,9 +11,9 @@ import conversation from "~/assets/illustrations/conversation.svg";
 export default function Index() {
   const header = (
     <div
-      className={`flex items-center justify-between gap-5 md:px-10 px-6 text-white dark:text-white h-[80vh]`}
+      className={`flex items-center justify-between gap-5 md:px-10 px-6 text-white dark:text-white h-[50vh] md:h-[80vh]`}
     >
-      <div className="flex-1 flex flex-col gap-6">
+      <div className="flex-1 flex flex-col gap-3 md:gap-6">
         <Fade direction="down" duration={1500} triggerOnce className="">
           <p className="text-slate-400 font-nunito font-bold text-xl">
             Look no further for
