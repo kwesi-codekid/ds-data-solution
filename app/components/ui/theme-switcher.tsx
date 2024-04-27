@@ -13,7 +13,7 @@ const ThemeSwitcher = () => {
   return (
     <Switch
       isSelected={isLightTheme}
-      size="lg"
+      size="sm"
       color="success"
       startContent={<SunIcon />}
       endContent={<MoonIcon />}

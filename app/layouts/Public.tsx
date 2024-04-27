@@ -9,7 +9,7 @@ const PublicLayout = ({
   headerContent,
 }: {
   children: ReactNode;
-  headerContent: ReactNode;
+  headerContent?: ReactNode;
 }) => {
   return (
     <>
@@ -17,7 +17,7 @@ const PublicLayout = ({
         <Navbar />
         <div className="max-w-5xl mx-auto">{headerContent}</div>
       </header>
-      <main>{children}</main>
+      <main className="">{children}</main>
       <footer>
         <div className="bg-blue-700">
           <div className="flex items-center max-w-5xl mx-auto justify-between py-3 px-4">

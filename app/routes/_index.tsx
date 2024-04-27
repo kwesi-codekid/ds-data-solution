@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Button } from "@nextui-org/react";
 import { Fade } from "react-awesome-reveal";
 
@@ -7,8 +7,16 @@ import ChooseUsSection from "~/components/sections/choose-us";
 import Packages from "~/components/sections/packages";
 
 import conversation from "~/assets/illustrations/conversation.svg";
+import PackageController from "~/controllers/PackageController";
+import { PackageInterface } from "~/types";
+import { useLoaderData } from "@remix-run/react";
 
 export default function Index() {
+  const { packages } = useLoaderData<{
+    packages: PackageInterface[];
+  }>();
+  console.log(packages);
+
   const header = (
     <div
       className={`flex items-center justify-between gap-5 md:px-10 px-6 text-white dark:text-white h-[50vh] md:h-[80vh]`}
@@ -46,12 +54,23 @@ export default function Index() {
   return (
     <PublicLayout headerContent={header}>
       <div>
-        <Packages />
+        <Packages packages={packages} />
         <ChooseUsSection />
       </div>
     </PublicLayout>
   );
 }
+
+export const loader: LoaderFunction = async ({ request, params }) => {
+  const packageController = new PackageController(request);
+  const { packages } = await packageController.getAllPackages({
+    limit: 10,
+    page: 1,
+    search_term: "",
+  });
+
+  return { packages };
+};
 
 export const meta: MetaFunction = () => {
   return [

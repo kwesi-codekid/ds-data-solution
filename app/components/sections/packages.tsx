@@ -5,27 +5,10 @@ import mtnLogo from "~/assets/images/mtn-logo.jpg";
 import airtelLogo from "~/assets/images/airteltigo-logo.png";
 import mtnAfaLogo from "~/assets/images/mtn-afa.jpg";
 import { Button } from "@nextui-org/react";
+import type { PackageInterface } from "~/types";
 
-const Packages = () => {
+const Packages = ({ packages }: { packages: PackageInterface[] }) => {
   const navigate = useNavigate();
-
-  const packages = [
-    {
-      name: "MTN Non-Expiry",
-      image: mtnLogo,
-      value: "mtn-non-expiry",
-    },
-    {
-      name: "MTN Afa Bundle",
-      image: mtnAfaLogo,
-      value: "mtn-afa",
-    },
-    {
-      name: "AirtelTigo Data",
-      image: airtelLogo,
-      value: "airteltigo",
-    },
-  ];
 
   return (
     <div className="py-20 bg-gradient-to-br dark:bg-none from-blue-400/10 to-indigo-700/20 dark:!bg-slate-950 px-4 md:px-12">
@@ -41,22 +24,23 @@ const Packages = () => {
           {packages.map((pkg, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-slate-900 dark:border dark:border-white/10 p-6 rounded-3xl  flex flex-col gap-4"
+              className="bg-white dark:bg-slate-900 dark:border dark:border-white/10 p-6 rounded-3xl  flex flex-col gap-4 group:"
             >
               <img
-                src={pkg.image}
-                alt={pkg.name}
-                className="w-full rounded-xl"
+                src={pkg.bannerImage}
+                alt={pkg.title}
+                className="w-full rounded-xl hover:scale-[1.05] cursor-pointer transition-all duration-400 ease-in-out"
+                onClick={() => navigate(`/purchase/${pkg._id}`)}
               />
               <h3 className="font-montserrat font-bold text-xl text-indigo-600 dark:text-white">
-                {pkg.name}
+                {pkg.title}
               </h3>
               <Button
                 className="font-montserrat font-semibold px-4 py-2 rounded-xl hover:!bg-indigo-600 hover:text-white"
                 variant="flat"
                 color="primary"
                 onClick={() => {
-                  navigate(`/packages/${pkg.value}`);
+                  navigate(`/purchase/${pkg._id}`);
                 }}
               >
                 Buy Now
