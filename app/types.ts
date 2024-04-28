@@ -44,3 +44,10 @@ export type OrderInterface = {
 };
 
 export type OrderStatus = "pending" | "processed";
+
+export type AdminInterface = {
+  _id: string;
+  email: string;
+  fullName: string;
+  password: string;
+};
