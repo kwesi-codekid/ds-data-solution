@@ -9,7 +9,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   return (
     <NextUIProvider>
-      <NextThemesProvider attribute="class" defaultTheme={theme}>
+      <NextThemesProvider attribute="class" defaultTheme={"light"}>
         {children}
       </NextThemesProvider>
     </NextUIProvider>

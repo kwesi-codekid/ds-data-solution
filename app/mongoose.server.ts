@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect(
-  "mongodb+srv://kwasibordes:Webdevtisgud4me@kwasidev.2j6iayq.mongodb.net/ds-data-solutions"
-);
+mongoose.connect(process.env.MONGODB_URI as string);
 
 const db = mongoose.connection;
 
