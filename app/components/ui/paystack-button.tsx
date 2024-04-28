@@ -32,8 +32,25 @@ const PaystackButton = ({ formData }: PaystackButtonProps) => {
   // you can call this function anything
   const handleClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    setLoading(false);
-    console.log("closed");
+    // setLoading(false);
+    // console.log("closed");
+    try {
+      submit(
+        {
+          ...formData,
+          path: location.pathname + location.search,
+          intent: "checkout",
+        },
+        {
+          method: "POST",
+          replace: true,
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const config = {

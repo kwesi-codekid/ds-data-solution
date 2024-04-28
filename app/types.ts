@@ -26,7 +26,21 @@ export type PaystackButtonProps = {
     email: string;
     amount: number;
     beneficiaryNumber: string;
-    bundleId: string;
+    bundle: string;
     intent: string;
   };
 };
+
+export type OrderInterface = {
+  _id: string;
+  fullName: string;
+  email: string;
+  amount: number;
+  beneficiaryNumber: string;
+  bundle: BundleInterface;
+  package: PackageInterface;
+  status: OrderStatus;
+  createdAt: string;
+};
+
+export type OrderStatus = "pending" | "processed";

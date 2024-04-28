@@ -13,6 +13,7 @@ import PublicLayout from "~/layouts/Public";
 import { BundleInterface, PackageInterface } from "~/types";
 import { useEffect, useState } from "react";
 import PaystackButton from "~/components/ui/paystack-button";
+import OrderController from "~/controllers/OrderController";
 
 const PurchaseDetail = () => {
   const { dataValue, pkg, bundles } = useLoaderData<{
@@ -33,15 +34,17 @@ const PurchaseDetail = () => {
     email: string;
     amount: number;
     beneficiaryNumber: string;
-    bundleId: string;
+    bundle: string;
     intent: string;
+    package: string;
   }>({
     fullName: "",
     email: "",
     amount: selectedPrice || 0,
     beneficiaryNumber: "",
-    bundleId: "",
+    bundle: "",
     intent: "checkout",
+    package: dataValue,
   });
 
   useEffect(() => {
@@ -142,7 +145,7 @@ const PurchaseDetail = () => {
                   }}
                   onChange={(e) => {
                     setValue(e.target.value);
-                    setFormData({ ...formData, bundleId: e.target.value });
+                    setFormData({ ...formData, bundle: e.target.value });
                   }}
                   renderValue={(bundles: SelectedItems<BundleInterface>) => {
                     return bundles.map((bundle, index: number) => (
@@ -189,6 +192,27 @@ export default PurchaseDetail;
 
 export const action: ActionFunction = async ({ request }) => {
   const url = new URL(request.url);
+  const formData = await request.formData();
+
+  const fullName = formData.get("fullName") as string;
+  const email = formData.get("email") as string;
+  const amount = formData.get("amount") as string;
+  const beneficiaryNumber = formData.get("beneficiaryNumber") as string;
+  const bundle = formData.get("bundle") as string;
+  const intent = formData.get("intent") as string;
+  const packageId = formData.get("package") as string;
+
+  const orderController = new OrderController(request);
+  const response = await orderController.createOrder({
+    fullName,
+    email,
+    amount: Number(amount),
+    beneficiaryNumber,
+    bundle,
+    package: packageId,
+  });
+
+  return response;
 };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
