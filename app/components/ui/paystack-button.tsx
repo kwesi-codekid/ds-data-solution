@@ -58,7 +58,7 @@ const PaystackButton = ({ formData }: PaystackButtonProps) => {
     email: formData.email,
     amount: formData.amount * 100,
     currency: "GHS",
-    publicKey: "pk_live_ba594bba168142d7f38456c1c36f1055d58a6326",
+    publicKey: "pk_live_7ae55166a84b19680e9460af23e4cdc5cc8ba43c",
   };
 
   const componentProps = {
