@@ -12,7 +12,7 @@ const Navbar = ({ showAdminButton = true }: { showAdminButton?: boolean }) => {
           to={"/"}
           className="font-poppins font-extrabold text-white text-xl"
         >
-          DS Data Solutions
+          DATAWAVE HUB
         </Link>
 
         <div className="flex items-center gap-2 md:gap-4">
