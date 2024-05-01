@@ -1,12 +1,13 @@
 import { PaystackConsumer } from "react-paystack";
 import { Button } from "@nextui-org/react";
-import { useSubmit } from "@remix-run/react";
+import { useNavigate, useSubmit } from "@remix-run/react";
 import { useState } from "react";
 import { PaystackButtonProps } from "~/types";
 
 const PaystackButton = ({ formData }: PaystackButtonProps) => {
   const [loading, setLoading] = useState(false);
   const submit = useSubmit();
+  const navigate = useNavigate();
 
   // you can call this function anything
   const handleSuccess = async () => {
@@ -26,26 +27,16 @@ const PaystackButton = ({ formData }: PaystackButtonProps) => {
       console.error(error);
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 
   // you can call this function anything
   const handleClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    // setLoading(false);
-    // console.log("closed");
     try {
-      submit(
-        {
-          ...formData,
-          path: location.pathname + location.search,
-          intent: "checkout",
-        },
-        {
-          method: "POST",
-          replace: true,
-        }
-      );
+      setLoading(false);
+      console.log("closed");
     } catch (error) {
       console.error(error);
     } finally {
