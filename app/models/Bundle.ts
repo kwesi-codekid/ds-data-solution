@@ -10,6 +10,7 @@ const BundleSchema = new mongoose.Schema({
   },
   volume: { type: Number, required: true },
   price: { type: Number, required: true },
+  agentPrice: { type: Number },
 });
 
 let Bundle: mongoose.Model<BundleInterface>;

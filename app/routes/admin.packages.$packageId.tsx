@@ -47,6 +47,10 @@ const PackageDetail = () => {
       id: "price",
     },
     {
+      name: "Agent Price (GHS)",
+      id: "agentPrice",
+    },
+    {
       name: "Actions",
       id: "actions",
     },
@@ -71,7 +75,7 @@ const PackageDetail = () => {
         </div>
 
         {/* bundles table */}
-        <div className="md:col-span-2 lg:col-span-3 rounded-2xl bg-white flex flex-col gap-4 p-4">
+        <div className="md:col-span-2 lg:col-span-3 rounded-2xl bg-white flex flex-col gap-4 p-4 h-full">
           <div className="flex items-center justify-between">
             <Button
               variant="flat"
@@ -82,7 +86,10 @@ const PackageDetail = () => {
               Add Bundle
             </Button>
           </div>
-          <Table>
+          <Table
+            aria-label="Bundles table"
+            className="lg:h-[70vh] overflow-y-auto"
+          >
             <TableHeader columns={bundleTableCols}>
               {bundleTableCols.map((column, index) => (
                 <TableColumn key={index}>{column.name}</TableColumn>
@@ -97,9 +104,13 @@ const PackageDetail = () => {
                     </p>
                   </TableCell>
                   <TableCell>
-                    {" "}
                     <p className="font-nunito text-lg text-slate-700">
                       {bundle.price}
+                    </p>
+                  </TableCell>
+                  <TableCell>
+                    <p className="font-nunito text-lg text-slate-700">
+                      {bundle.agentPrice}
                     </p>
                   </TableCell>
                   <TableCell className="flex items-center gap-2 font-nunito font-medium">
@@ -155,6 +166,12 @@ const PackageDetail = () => {
             label="Price"
             labelPlacement="outside"
           />
+          <Input
+            type="number"
+            name="agentPrice"
+            label="Agent Price"
+            labelPlacement="outside"
+          />
         </div>
       </CreateRecordModal>
     </AdminLayout>
@@ -170,6 +187,7 @@ export const action: ActionFunction = async ({ request }) => {
   const intent = formData.get("intent");
   const volume = parseInt(formData.get("volume") as string);
   const price = parseInt(formData.get("price") as string);
+  const agentPrice = parseInt(formData.get("agentPrice") as string);
   const packageId = formData.get("packageId") as string;
 
   const packageController = new PackageController(request);
@@ -178,6 +196,7 @@ export const action: ActionFunction = async ({ request }) => {
     const response = await packageController.createBundle({
       volume,
       price,
+      agentPrice,
       packageId,
     });
     return response;

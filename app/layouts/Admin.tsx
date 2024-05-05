@@ -82,7 +82,7 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
               <Button
                 isIconOnly
                 variant="light"
-                className="text-white hidden lg:block"
+                className="text-white hidden lg:flex items-center justify-center"
                 onClick={() => setIsDesktopExpanded(false)}
               >
                 <svg
@@ -98,7 +98,7 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
               <Button
                 isIconOnly
                 variant="light"
-                className="text-white hidden lg:block"
+                className="text-white hidden lg:flex items-center justify-center"
                 onClick={() => setIsDesktopExpanded(true)}
               >
                 <svg

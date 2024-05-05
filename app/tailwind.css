@@ -54,6 +54,23 @@
     }
 }
 
+.overflow-y-auto::-webkit-scrollbar {
+    width: 3px !important;
+    border-radius: 12px !important;
+    background-color: #bfdbfe !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    width: 3px !important;
+        border-radius: 12px !important;
+        background-color: #bfdbfe !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: #2563eb !important;
+    border-radius: 12px !important;
+}
+
 @keyframes carousel {
     0% {
         background-image: url('./assets/illustrations/chat-bubbles.svg');

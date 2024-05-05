@@ -100,16 +100,19 @@ export default class PackageController {
     volume,
     packageId,
     price,
+    agentPrice,
   }: {
     volume: number;
-    price: number;
+    price?: number;
     packageId: string;
+    agentPrice?: number;
   }) {
     try {
       const bundle = new Bundle({
         volume: volume,
         price: price,
         package: packageId,
+        agentPrice: agentPrice,
       });
 
       await bundle.save();

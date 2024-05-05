@@ -12,6 +12,7 @@ export type BundleInterface = {
   package: PackageInterface;
   volume: number;
   price: number;
+  agentPrice: number;
 };
 
 export type AdminNavLinkInterface = {
