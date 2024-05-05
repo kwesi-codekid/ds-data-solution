@@ -22,7 +22,7 @@ const PublicLayout = ({
         <div className="bg-blue-700">
           <div className="flex items-center max-w-5xl mx-auto justify-between py-3 px-4">
             <p className="font-nunito text-white font-semibold">
-              Copyright &copy; {new Date().getFullYear()} | DS Data Solutions
+              Copyright &copy; {new Date().getFullYear()} | DataWave Hub
             </p>
           </div>
         </div>
