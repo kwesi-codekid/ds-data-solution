@@ -52,3 +52,13 @@ export type AdminInterface = {
   fullName: string;
   password: string;
 };
+
+export type UserInterface = {
+  _id: string;
+  email: string;
+  fullName: string;
+  password: string;
+  phoneNumber: string;
+  userType: "agent" | "user";
+  createdAt: string;
+};

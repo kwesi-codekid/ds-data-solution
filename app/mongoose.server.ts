@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
-mongoose.connect(
-  "mongodb+srv://kwasibordes:Webdevtisgud4me@kwasidev.2j6iayq.mongodb.net/ds-data-solutions"
-);
+// mongoose.connect(
+//   "mongodb+srv://kwasibordes:Webdevtisgud4me@kwasidev.2j6iayq.mongodb.net/ds-data-solutions"
+// );
+mongoose.connect("mongodb://localhost:27017/ds-data-solution");
 
 const db = mongoose.connection;
 

@@ -1,11 +1,12 @@
 import { ReactNode, useState } from "react";
-import { Link, useLocation } from "@remix-run/react";
+import { Link, useLocation, useSubmit } from "@remix-run/react";
 import { Button } from "@nextui-org/react";
 import { adminNavLinks } from "~/data/nav-links";
 import { AdminNavLinkInterface } from "~/types";
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation();
+  const submit = useSubmit();
   const [isDesktopExpanded, setIsDesktopExpanded] = useState(true);
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
 
@@ -73,6 +74,39 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
             </Link>
           ))}
         </div>
+        <Button
+          onClick={() => {
+            submit(
+              {},
+              {
+                action: "/logout",
+                method: "POST",
+              }
+            );
+          }}
+          className={`flex items-center ${
+            isDesktopExpanded ? "" : "justify-center"
+          } gap-2 p-2 text-white font-nunito rounded-xl`}
+          isIconOnly={!isDesktopExpanded}
+          startContent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"
+              />
+            </svg>
+          }
+        >
+          {isDesktopExpanded && <span>Logout</span>}
+        </Button>
       </aside>
 
       <section className="flex-1 h-full flex flex-col gap-4">

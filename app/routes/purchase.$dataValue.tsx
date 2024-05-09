@@ -10,16 +10,18 @@ import {
 } from "@nextui-org/react";
 import PackageController from "~/controllers/PackageController";
 import PublicLayout from "~/layouts/Public";
-import { BundleInterface, PackageInterface } from "~/types";
+import { BundleInterface, PackageInterface, UserInterface } from "~/types";
 import { useEffect, useState } from "react";
 import PaystackButton from "~/components/ui/paystack-button";
 import OrderController from "~/controllers/OrderController";
+import UserController from "~/controllers/UserController";
 
 const PurchaseDetail = () => {
-  const { dataValue, pkg, bundles } = useLoaderData<{
+  const { dataValue, pkg, bundles, user } = useLoaderData<{
     dataValue: string;
     pkg: PackageInterface;
     bundles: BundleInterface[];
+    user: UserInterface;
   }>();
 
   const [value, setValue] = useState<string>("");
@@ -38,8 +40,8 @@ const PurchaseDetail = () => {
     intent: string;
     package: string;
   }>({
-    fullName: "",
-    email: "",
+    fullName: user.fullName,
+    email: user.email,
     amount: selectedPrice || 0,
     beneficiaryNumber: "",
     bundle: "",
@@ -218,6 +220,10 @@ export const action: ActionFunction = async ({ request }) => {
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { dataValue } = params;
 
+  const userController = new UserController(request);
+  await userController.requireUserId();
+  const user = await userController.getUser();
+
   const packageController = new PackageController(request);
   const pkg = await packageController.getPackageById({
     packageId: dataValue || "",
@@ -230,5 +236,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     dataValue,
     pkg,
     bundles,
+    user,
   };
 };

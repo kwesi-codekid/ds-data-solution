@@ -31,10 +31,10 @@ export default function Index() {
           </h1>
           <Button
             variant="ghost"
-            className="border-indigo-600 hover:!bg-indigo-600 font-montserrat text-indigo-600 hover:text-white !font-semibold w-max px-12"
+            className="border-indigo-600 hover:!bg-indigo-600 font-montserrat text-indigo-600 hover:text-white !font-semibold w-max px-4"
             radius="lg"
           >
-            Buy Now
+            Become an Agent
           </Button>
         </Fade>
       </div>
